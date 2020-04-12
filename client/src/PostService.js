@@ -1,14 +1,14 @@
-import axios from axios;
+import axios from 'axios';
 
-const port = process.env.PORT || 5000;
-const url = (process.env.URL || 'http://localhost:') + port + '/api/posts/';
+const url = '/api/posts/';
 
 class PostService {
   // Get posts
   static getPosts() {
-    return new Promise(async (resolve, reject) => {
-      try {
-        const res = await axios.get(url);
+    console.log('URL: '+url);
+
+    return new Promise((resolve, reject) => {
+      axios.get(url).then((res) => {
         const data = res.data;
         resolve(
           data.map(post => ({
@@ -16,22 +16,18 @@ class PostService {
             creationDate: new Date(post.creationDate)
           }))
         );
-      } catch(error) {
-        reject(error);
-      }
+      }).catch((err) => reject(err));
     });
   }
 
   // Create post
   static createPost(text) {
-    return axios.post(url, {
-      text
-    });
+    return axios.post(url, {text});
   }
 
   // Delete post
   static deletePost(postId) {
-    return axios.delete(`${url}${id}`);
+    return axios.delete(`${url}${postId}`);
   }
 
 }
