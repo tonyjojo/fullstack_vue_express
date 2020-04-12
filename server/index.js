@@ -9,13 +9,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const posts = require('./routes/api/posts')
+const posts = require('./routes/api/posts');
+
 app.use('/api/posts', posts);
 
 // Handle production
 if(process.env.NODE_ENV === 'production') {
     // Static folder
-    app.user(express.static(__dirname + '/public/'));
+    app.use(express.static(__dirname + '/public/'));
 
     // Handle SPA
     app.get(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
