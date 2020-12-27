@@ -3,50 +3,63 @@
     <h1>Latest Posts</h1>
     <div class="create-post">
       <label for="create-post">Post something mothafucka... </label>
-      <input type="text" id="create-post" v-model="newPostText" placeholder="Create post">
+      <input
+        type="text"
+        id="create-post"
+        v-model="newPostText"
+        placeholder="Create post"
+      />
       <button @click="createPost">Post!</button>
     </div>
-    <hr>
-    <p class="error" v-if="error">{{error}}</p>
+    <hr />
+    <p class="error" v-if="error">{{ error }}</p>
     <div class="posts-container">
-      <div class="post" @dblclick="deletePost(post._id)"
-        v-for="(post, index) in posts" :key="index">
+      <div
+        class="post"
+        @dblclick="deletePost(post._id)"
+        v-for="(post, index) in posts"
+        :key="index"
+      >
         <div class="created-at">
-          {{`${post.creationDate.getDate()}/${post.creationDate.getMonth()}/${post.creationDate.getFullYear()}`}}
+          {{
+            `${post.creationDate.getDate()}/${post.creationDate.getMonth()}/${post.creationDate.getFullYear()}`
+          }}
         </div>
-        <p class="text">{{post.text}}</p>
+        <p class="text">{{ post.text }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import PostService from '../PostService';
+import PostService from "../PostService";
 
 export default {
-  name: 'PostComponent',
+  name: "Posts",
   data() {
     return {
       posts: [],
-      error: '',
-      newPostText: ''
-    }
+      error: "",
+      newPostText: "",
+    };
   },
   async created() {
     try {
       this.updatePosts(await PostService.getPosts());
-    } catch(err) {
+    } catch (err) {
       this.error = err.message;
     }
   },
   methods: {
     updatePosts(newPosts) {
-      this.posts = newPosts.sort((b,a) => new Date(a.creationDate) - new Date(b.creationDate));
+      this.posts = newPosts.sort(
+        (b, a) => new Date(a.creationDate) - new Date(b.creationDate)
+      );
     },
     async createPost() {
       this.error = "";
 
-      if(this.newPostText.length > 0) {
+      if (this.newPostText.length > 0) {
         await PostService.createPost(this.newPostText);
         this.updatePosts(await PostService.getPosts());
       } else {
@@ -57,10 +70,10 @@ export default {
       this.error = "";
 
       await PostService.deletePost(postId);
-        this.updatePosts(await PostService.getPosts());
-    }
-  }
-}
+      this.updatePosts(await PostService.getPosts());
+    },
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -91,7 +104,7 @@ div.created-at {
   left: 0;
   padding: 5px 15px 5px 15px;
   background-color: darkgreen;
-  color: white
+  color: white;
 }
 
 p.text {
