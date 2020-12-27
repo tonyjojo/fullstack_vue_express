@@ -2,7 +2,7 @@
   <div class="container">
     <h1>Latest Posts</h1>
     <div class="create-post">
-      <label for="create-post">Post something mothafucka... </label>
+      <label for="create-post">Post something updated... </label>
       <input
         type="text"
         id="create-post"
