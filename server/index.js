@@ -9,10 +9,8 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-const posts = require("./routes/api/posts");
 const trucos = require("./routes/api/trucos");
 
-app.use("/api/posts", posts);
 app.use("/api/trucos", trucos);
 
 // Handle production

@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
 // Add truco
 router.post("/", async (req, res) => {
   if (req.body) {
-    const trucos = await loadPostsCollection();
+    const trucos = await loadTrucosCollection();
     await trucos.insertOne({
       text: req.body.text,
       creationDate: new Date()
@@ -29,7 +29,7 @@ router.post("/", async (req, res) => {
 // Delete truco
 router.delete("/:id", async (req, res) => {
   if (req.params && req.params.id) {
-    const trucos = await loadPostsCollection();
+    const trucos = await loadTrucosCollection();
     await trucos.deleteOne({ _id: new mongodb.ObjectID(req.params.id) });
     res.status(200).send();
   } else {
