@@ -14,13 +14,14 @@ router.post("/", async (req, res) => {
   if (req.body) {
     const trucos = await loadTrucosCollection();
     await trucos.insertOne({
-      text: req.body.text,
+      ...req.body,
       creationDate: new Date()
     });
     res.status(201).send();
 
     console.log("------------------");
-    console.log(`New trucos created: ${req.body.text}`);
+    console.log("Nuevo truco creado:");
+    console.log(req.body);
   } else {
     res.status(400).end();
   }

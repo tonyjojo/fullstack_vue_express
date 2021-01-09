@@ -22,8 +22,8 @@ class TrucoService {
   }
 
   // Create truco
-  static createTruco(text) {
-    return axios.post(url, { text });
+  static createTruco(truco) {
+    return axios.post(url, truco);
   }
 
   // Delete truco
