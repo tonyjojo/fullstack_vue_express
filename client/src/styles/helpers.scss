@@ -1,0 +1,32 @@
+.full-size {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.center-horizontally {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.first-capital {
+  text-transform: capitalize;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="list">
     <h1>Los truquitos del Raf</h1>
     <div class="create-truco">
       <label for="create-truco">Añadir un nuevo truco</label>
@@ -14,7 +14,7 @@
     <hr />
     <p class="error" v-if="error">{{ error }}</p>
     <div class="trucos-container">
-      <Tarjeta
+      <Carta
         v-for="(truco, index) in trucos"
         :key="index"
         :truco="truco"
@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import Tarjeta from "@/components/Tarjeta";
+import Carta from "@/components/Carta";
 import TrucoService from "@/helpers/TrucoService";
 
 export default {
   name: "Trucos",
   components: {
-    Tarjeta,
+    Carta,
   },
   data() {
     return {
@@ -70,7 +70,7 @@ export default {
           nExpectadores: 6 /* Número de expectadores */,
           buenEstadoBaraja: true /* Bien / Mal */,
           completa: true /* Sí / No */,
-          tipoBaraja: "Esapñola" /* Española / Francesa / Tarot */,
+          tipoBaraja: "Española" /* Española / Francesa / Tarot */,
           ordenacion:
             "Mezclada" /* Mezclada / Parcialmente ordenada / Ordenación total / Tamariz */,
           mesa: true /* Si / No */,
@@ -92,16 +92,20 @@ export default {
 };
 </script>
 
-<style>
-div.container {
-  max-width: 800px;
-  margin: 0 auto;
-}
+<style lang="scss" scoped>
+#list {
+  margin: 3 * $unit;
 
-p.error {
-  border: 1px solid #ff5b5f;
-  background-color: #ffc5c1;
-  padding: 10px;
-  margin-bottom: 15px;
+  .error {
+    border: 1px solid #ff5b5f;
+    background-color: #ffc5c1;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+
+  .trucos-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 </style>

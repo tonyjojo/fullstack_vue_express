@@ -1,14 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Trucos from "@/views/Trucos.vue";
+import List from "@/views/List.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
-    name: "Trucos",
-    component: Trucos
+    name: "List",
+    component: List
   }
 ];
 
@@ -20,7 +20,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (!to.matched.length) {
-    next({ name: "Trucos" });
+    next({ name: "List" });
   }
 
   next();

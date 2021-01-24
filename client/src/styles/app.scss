@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  background-color: $light-blue;
+}
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: $soft-black;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
