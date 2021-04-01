@@ -1,16 +1,6 @@
 <template>
   <div id="list">
     <h1>Los truquitos del Raf</h1>
-    <div class="create-truco">
-      <label for="create-truco">Añadir un nuevo truco</label>
-      <input
-        type="text"
-        id="create-truco"
-        v-model="newTrucoText"
-        placeholder="Create truco"
-      />
-      <button @click="createTruco">Truco!</button>
-    </div>
     <hr />
     <p class="error" v-if="error">{{ error }}</p>
     <div class="trucos-container">
@@ -29,7 +19,7 @@ import Carta from "@/components/Carta";
 import TrucoService from "@/helpers/TrucoService";
 
 export default {
-  name: "Trucos",
+  name: "List",
   components: {
     Carta,
   },
@@ -37,7 +27,6 @@ export default {
     return {
       trucos: [],
       error: "",
-      newTrucoText: "",
     };
   },
   async created() {
@@ -59,34 +48,6 @@ export default {
       this.trucos = newTrucos.sort(
         (b, a) => new Date(a.creationDate) - new Date(b.creationDate)
       );
-    },
-    async createTruco() {
-      this.error = "";
-
-      if (this.newTrucoText.length > 0) {
-        const truco = {
-          titulo: this.newTrucoText,
-          posicion: "Sentado" /* De pie / Sentado */,
-          nExpectadores: 6 /* Número de expectadores */,
-          buenEstadoBaraja: true /* Bien / Mal */,
-          completa: true /* Sí / No */,
-          tipoBaraja: "Española" /* Española / Francesa / Tarot */,
-          ordenacion:
-            "Mezclada" /* Mezclada / Parcialmente ordenada / Ordenación total / Tamariz */,
-          mesa: true /* Si / No */,
-          trucada: false /* Sí / No */,
-          angulos: false /* Sí / No */,
-          efectos:
-            "Agua y aceite" /* Agua y aceite / Predicción / Adivinación */,
-          duracion: 60 /* En segundos */,
-          descripcion: "De lo que va este truco",
-        };
-
-        await TrucoService.createTruco(truco);
-        this.updateTrucos(await TrucoService.getTrucos());
-      } else {
-        this.error = "Trucos can't be empty";
-      }
     },
   },
 };
